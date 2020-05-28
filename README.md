@@ -27,10 +27,9 @@ require '../vendor/autoload.php;
 
 use AndreDeBrito\PHPViaCep\PhpViaCep;
 
-$findByCep = (new PhpViaCep())
-					->findByCep("01001000")
-					->json()->fetch()
-					->jsonToObject();
+$findByCep = (new PhpViaCep())->findByCep("01001000")
+	      ->json()->fetch()
+	      ->jsonToObject();
 
 var_dump($findByCep->getResponse());
 ```
@@ -38,8 +37,8 @@ var_dump($findByCep->getResponse());
 #### Retorno em XML:
 ```php
 $findByCep = (new PhpViaCep())->findByCep("01001000")
-						->xml()
-						->fetch();
+	      ->xml()
+	      ->fetch();
 
 var_dump($findByCep->getResponse());
 ```
@@ -47,8 +46,8 @@ var_dump($findByCep->getResponse());
 #### Retorno em PIPED:
 ```php
 $findByCep = (new PhpViaCep())->findByCep("01001000")
-						->piped()
-						->fetch();
+	      ->piped()
+	      ->fetch();
 
 var_dump($findByCep->getResponse());
 ```
@@ -56,8 +55,8 @@ var_dump($findByCep->getResponse());
 #### Retorno em QUERTY:
 ```php
 $findByCep = (new PhpViaCep())->findByCep("01001000")
-						->querty()
-						->fetch();
+	      ->querty()
+	      ->fetch();
 
 var_dump($findByCep->getResponse());
 ```
@@ -72,9 +71,9 @@ require '../vendor/autoload.php';
 use AndreDeBrito\PHPViaCep\PhpViaCep;
 
 $findByAddress = (new PhpViaCep())->findByAddress("SP", "Poá", "Avenida Brasil")
-								->json()
-								->fetch()
-								->jsonToObject();
+		  ->json()
+		  ->fetch()
+		  ->jsonToObject();
 
 var_dump($findByAddress->getResponse());
 ```
@@ -82,8 +81,8 @@ var_dump($findByAddress->getResponse());
 #### Retorno em XML
 ```php
 $findByAddress = (new PhpViaCep())->findByAddress("SP", "Poá", "Avenida Brasil")
-								->xml()
-								->fetch();
+		  ->xml()
+		  ->fetch();
 
 var_dump($findByAddress->getResponse());
 ```
