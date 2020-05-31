@@ -51,10 +51,10 @@ abstract class ViaCepApi {
         return $this->response;
     }
 
-   /**
-    * 
-    * @return string
-    */
+    /**
+     * 
+     * @return string
+     */
     public function getError(): string {
         return $this->error;
     }
@@ -130,7 +130,11 @@ abstract class ViaCepApi {
      * @return \AndreDeBrito\PHPViaCep\ViaCepApi|null
      */
     public function fetch(): ?ViaCepApi {
-        $this->request("GET", $this->endpoint);
+        if (!$this->error) {
+            $this->request("GET", $this->endpoint);
+            return $this;
+        }
+        
         return $this;
     }
 
