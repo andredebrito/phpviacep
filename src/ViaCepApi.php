@@ -22,6 +22,9 @@ abstract class ViaCepApi {
     /** @var mixed */
     protected $response;
 
+    /** @var sring */
+    private $error;
+
     /**
      * ViaCepAPi constructor
      */
@@ -46,6 +49,14 @@ abstract class ViaCepApi {
      */
     public function getResponse() {
         return $this->response;
+    }
+
+   /**
+    * 
+    * @return string
+    */
+    public function getError(): string {
+        return $this->error;
     }
 
     /**
