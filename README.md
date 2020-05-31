@@ -86,3 +86,6 @@ $findByAddress = (new PhpViaCep())->findByAddress("SP", "Poá", "Avenida Brasil"
 
 var_dump($findByAddress->getResponse());
 ```
+
+## Tratamento de Erros
+Caso o retorno do método `getResponse()` seja **null** utilize o método `getError()` para visualizar o erro.
