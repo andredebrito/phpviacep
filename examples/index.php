@@ -69,7 +69,7 @@ $findByAddress = (new PhpViaCep())->findByAddress("SP", "Poá", "Avenida Brasil"
                     <div style="margin-top: 20px;">
                         <p><b>Resultado jsonToObject:</b></p>
                         <code class="text-light bg-light">
-                            <?= ($findByCep->getResponse()); ?>
+                            <?= var_dump($findByCep->getResponse()); ?>
                         </code>
 
                         <p><b>Resultado XML:</b></p>
@@ -152,6 +152,14 @@ $findByAddress = (new PhpViaCep())->findByAddress("SP", "Poá", "Avenida Brasil"
                 </div>
             </div>
 
+            
+            <div style="margin-top: 50px;">
+                <h4>Tratamento de erros</h4>
+                <p>
+                    Caso o retorno do método <code>getResponse()</code> seja null utilize o método 
+                    <code>getError()</code> para visualizar o erro.
+                </p>
+            </div>
         </div>
 
     </container>
