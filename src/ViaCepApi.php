@@ -23,7 +23,7 @@ abstract class ViaCepApi {
     protected $response;
 
     /** @var sring */
-    private $error;
+    protected $error;
 
     /**
      * ViaCepAPi constructor
