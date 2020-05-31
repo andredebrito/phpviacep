@@ -44,7 +44,12 @@ class PhpViaCep extends ViaCepApi {
      */
     public function findByCep(string $cep): ?PhpViaCep {
         $this->cep = trim($cep);
-        $this->validateCep();
+
+        try {
+            $this->validateCep();
+        } catch (InvalidCepException $ex) {
+            $this->error = $ex->getMessage();
+        }
 
         $this->setEndpoint("/{$this->cep}/");
         return $this;
@@ -62,9 +67,23 @@ class PhpViaCep extends ViaCepApi {
         $this->city = trim($city);
         $this->address = trim($address);
 
-        $this->validateUf();
-        $this->validateCity();
-        $this->validateAddress();
+        try {
+            $this->validateUf();
+        } catch (InvalidUfException $ex) {
+            $this->error = $ex->getMessage();
+        }
+
+        try {
+            $this->validateCity();
+        } catch (InvalidCityException $ex) {
+            $this->error = $ex->getMessage();
+        }
+
+        try {
+            $this->validateAddress();
+        } catch (InvalidAddressException $ex) {
+            $this->error = $ex->getMessage();
+        }
 
         $this->setEndpoint("/{$this->uf}/{$this->city}/{$this->address}/");
         return $this;
