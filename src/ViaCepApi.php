@@ -55,7 +55,7 @@ abstract class ViaCepApi {
      * 
      * @return string
      */
-    public function getError(): string {
+    public function getError(): ?string {
         return $this->error;
     }
 
