@@ -124,10 +124,10 @@ abstract class ViaCepApi {
      * @return \AndreDeBrito\PHPViaCep\ViaCepApi|null
      */
     public function jsonToObject(): ?ViaCepApi {
-       if($this->responseType == "json"){
-           $this->responseType = "object";
-           $this->response = (object) json_decode($this->response);
-       }
+      if ($this->responseType == "json" && $this->response != "[]") {
+            $this->responseType = "object";
+            $this->response = (object) json_decode($this->response);
+        }
        
        return $this;       
     }
@@ -182,14 +182,15 @@ abstract class ViaCepApi {
 
     private function checkNullResponse() {
         switch ($this->responseType) {
+
             case "object":
                 return (!empty($this->response->erro) ? null : $this->response);
 
             case "json":
-                return (in_array("erro", json_decode($this->response)) ? null : $this->response);
+                return ($this->response && in_array("erro", json_decode($this->response)) || ($this->response == "[]") ? null : $this->response);
 
             case "xml":
-                return (simplexml_load_string($this->response)->erro ? null : $this->response);
+                return (!empty(simplexml_load_string($this->response)->erro) || empty(simplexml_load_string($this->response)->enderecos) ? null : $this->response);
 
             case "pided":
                 return ($this->response == "erro:true" ? null : $this->response);
