@@ -22,6 +22,9 @@ abstract class ViaCepApi {
     /** @var mixed */
     protected $response;
 
+    /** @var string */
+    protected $responseType;
+
     /** @var sring */
     protected $error;
 
@@ -48,7 +51,7 @@ abstract class ViaCepApi {
      * @return mixed
      */
     public function getResponse() {
-        return $this->response;
+        return $this->response = $this->checkNullResponse();         
     }
 
     /**
@@ -66,6 +69,7 @@ abstract class ViaCepApi {
      */
     public function json(): ?ViaCepApi {
         $this->endpoint .= "json/";
+        $this->responseType = "json";
         return $this;
     }
 
@@ -76,6 +80,7 @@ abstract class ViaCepApi {
      */
     public function jsonUnicode(): ?ViaCepApi {
         $this->endpoint .= "json/unicode/";
+        $this->responseType = "json";
         return $this;
     }
 
@@ -86,6 +91,7 @@ abstract class ViaCepApi {
      */
     public function xml(): ?ViaCepApi {
         $this->endpoint .= "xml/";
+        $this->responseType = "xml";
         return $this;
     }
 
@@ -96,6 +102,7 @@ abstract class ViaCepApi {
      */
     public function piped(): ?ViaCepApi {
         $this->endpoint .= "piped/";
+        $this->responseType = "pided";
         return $this;
     }
 
@@ -106,6 +113,7 @@ abstract class ViaCepApi {
      */
     public function querty(): ?ViaCepApi {
         $this->endpoint .= "querty/";
+        $this->responseType = "querty";
         return $this;
     }
 
@@ -116,12 +124,12 @@ abstract class ViaCepApi {
      * @return \AndreDeBrito\PHPViaCep\ViaCepApi|null
      */
     public function jsonToObject(): ?ViaCepApi {
-        $decodedObject = (object) json_decode($this->response);
-
-        if (count((array) $decodedObject) > 0) {
-            $this->response = $decodedObject;
-        }
-        return $this;
+       if($this->responseType == "json"){
+           $this->responseType = "object";
+           $this->response = (object) json_decode($this->response);
+       }
+       
+       return $this;       
     }
 
     /**
@@ -134,7 +142,7 @@ abstract class ViaCepApi {
             $this->request("GET", $this->endpoint);
             return $this;
         }
-        
+
         return $this;
     }
 
@@ -168,8 +176,27 @@ abstract class ViaCepApi {
             CURLOPT_CUSTOMREQUEST => $this->method
         ));
 
-        $this->response = curl_exec($curl);
+        $this->response = curl_exec($curl);       
         curl_close($curl);
+    }
+
+    private function checkNullResponse() {
+        switch ($this->responseType) {
+            case "object":
+                return (!empty($this->response->erro) ? null : $this->response);
+
+            case "json":
+                return (in_array("erro", json_decode($this->response)) ? null : $this->response);
+
+            case "xml":
+                return (simplexml_load_string($this->response)->erro ? null : $this->response);
+
+            case "pided":
+                return ($this->response == "erro:true" ? null : $this->response);
+
+            case "querty":
+                return ($this->response == "erro=true" ? null : $this->response);
+        }
     }
 
 }
