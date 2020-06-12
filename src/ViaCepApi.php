@@ -190,7 +190,7 @@ abstract class ViaCepApi {
                 return ($this->response && in_array("erro", json_decode($this->response)) || ($this->response == "[]") ? null : $this->response);
 
             case "xml":
-                return (!empty(simplexml_load_string($this->response)->erro) || empty(simplexml_load_string($this->response)->enderecos) ? null : $this->response);
+                return (!empty(simplexml_load_string($this->response)->erro) || (isset(simplexml_load_string($this->response)->enderecos) && (string)simplexml_load_string($this->response)->enderecos == "") ? null : $this->response);
 
             case "pided":
                 return ($this->response == "erro:true" ? null : $this->response);

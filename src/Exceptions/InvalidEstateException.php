@@ -10,6 +10,6 @@ use RuntimeException;
  * @author André de Brito <https://github.com/andredebrito>
  * @package AndredeBrito\PHPViaCep\Exceptions
  */
-class InvalidUfException extends RuntimeException{
+class InvalidEstateException extends RuntimeException{
     
 }

@@ -6,7 +6,7 @@ use AndreDeBrito\PHPViaCep\ViaCepApi;
 use AndreDeBrito\PHPViaCep\Validators\EmptyValidator;
 use AndreDeBrito\PHPViaCep\Validators\LengthValidator;
 use AndreDeBrito\PHPViaCep\Exceptions\InvalidCepException;
-use AndreDeBrito\PHPViaCep\Exceptions\InvalidUfException;
+use AndreDeBrito\PHPViaCep\Exceptions\InvalidEstateException;
 use AndreDeBrito\PHPViaCep\Exceptions\InvalidCityException;
 use AndreDeBrito\PHPViaCep\Exceptions\InvalidAddressException;
 
@@ -22,7 +22,7 @@ class PhpViaCep extends ViaCepApi {
     private $cep;
 
     /** @var string */
-    private $uf;
+    private $estate;
 
     /** @var string */
     private $city;
@@ -57,19 +57,19 @@ class PhpViaCep extends ViaCepApi {
 
     /**
      * 
-     * @param string $uf
+     * @param string $estate
      * @param string $city
      * @param string $address
      * @return \AndreDeBrito\PHPViaCep\PhpViaCep|null
      */
-    public function findByAddress(string $uf, string $city, string $address): ?PhpViaCep {
-        $this->uf = trim($uf);
+    public function findByAddress(string $estate, string $city, string $address): ?PhpViaCep {
+        $this->estate = trim($estate);
         $this->city = trim($city);
         $this->address = trim($address);
 
         try {
-            $this->validateUf();
-        } catch (InvalidUfException $ex) {
+            $this->validateEstate();
+        } catch (InvalidEstateException $ex) {
             $this->error = $ex->getMessage();
         }
 
@@ -85,7 +85,7 @@ class PhpViaCep extends ViaCepApi {
             $this->error = $ex->getMessage();
         }
 
-        $this->setEndpoint("/{$this->uf}/{$this->city}/{$this->address}/");
+        $this->setEndpoint("/{$this->estate}/{$this->city}/{$this->address}/");
         return $this;
     }
 
@@ -111,15 +111,15 @@ class PhpViaCep extends ViaCepApi {
     /**
      * 
      * @return void
-     * @throws InvalidUfException
+     * @throws InvalidEstateException
      */
-    private function validateUf(): void {
-        if (!EmptyValidator::isValid($this->uf)) {
-            throw new InvalidUfException("Informe o UF!");
+    private function validateEstate(): void {
+        if (!EmptyValidator::isValid($this->estate)) {
+            throw new InvalidEstateException("Informe o UF!");
         }
 
-        if (!LengthValidator::equals($this->uf, 2)) {
-            throw new InvalidUfException("O UF deve ter somente 2 caracteres");
+        if (!LengthValidator::equals($this->estate, 2)) {
+            throw new InvalidEstateException("O UF deve ter somente 2 caracteres");
         }
     }
 
