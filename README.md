@@ -89,3 +89,11 @@ var_dump($findByAddress->getResponse());
 
 ## Tratamento de Erros
 Caso o retorno do método `getResponse()` seja **null** utilize o método `getError()` para visualizar o erro.
+
+#### Exemplo
+```php
+if($findByAddress->getError()){
+    echo $findByAddress->getError();
+}
+
+```
