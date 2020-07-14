@@ -1,7 +1,7 @@
 # PhpViaCep
 
-[![Build](https://img.shields.io/scrutinizer/build/g/andredebrito/phpviacep.svg?style=flat-square)](https://scrutinizer-ci.com/g/andredebrito/php-rest-api)
-[![Quality Score](https://img.shields.io/scrutinizer/quality/g/andredebrito/phpviacep.svg?style=flat-square)](https://scrutinizer-ci.com/g/andredebrito/php-rest-api)
+[![Build](https://img.shields.io/scrutinizer/build/g/andredebrito/phpviacep.svg?style=flat-square)](https://scrutinizer-ci.com/g/andredebrito/phpviacep)
+[![Quality Score](https://img.shields.io/scrutinizer/quality/g/andredebrito/phpviacep.svg?style=flat-square)](https://scrutinizer-ci.com/g/andredebrito/phpviacep)
 
 Este projeto tem por objetivo consumir o webservice ViaCEP. Utilizando o PHP e CURL.
 
