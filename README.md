@@ -2,6 +2,7 @@
 
 [![Build](https://img.shields.io/scrutinizer/build/g/andredebrito/phpviacep.svg?style=flat-square)](https://scrutinizer-ci.com/g/andredebrito/phpviacep)
 [![Quality Score](https://img.shields.io/scrutinizer/quality/g/andredebrito/phpviacep.svg?style=flat-square)](https://scrutinizer-ci.com/g/andredebrito/phpviacep)
+[![Total Downloads](https://img.shields.io/packagist/dt/andredebrito/phpviacep.svg?style=flat-square)](https://packagist.org/packages/andredebrito/phpviacep)
 
 Este projeto tem por objetivo consumir o webservice ViaCEP. Utilizando o PHP e CURL.
 
